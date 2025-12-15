@@ -23,29 +23,25 @@ class Coche {
     public void setVelocidad(int velocidad) {
         this.velocidad = velocidad;
     }
-    
+
     // Método acelerar (suma +10) COMPLETAR
-    public static void acelerar() {
-        int aumentoVelocidad += 10;
-        if (aumentoVelocidad <= 120) {
-            System.out.println("La velocidad del " + marca + " ha aumentado a " + setVelocidad(aumentoVelocidad));  
-        }
+    public void acelerar() {
+        setVelocidad(getVelocidad() + 10);
+        System.out.println("La velocidad del " + marca + " ha aumentado a " + getVelocidad());
     }
-   
+
     // Método frenar (resta -10 y nunca menor que 0) COMPLETAR
-    public static void frenar() {
-        int reduccionVelocidad -= 10;
-        if (reduccionVelocidad > -1) {
-            System.out.println("La velocidad del " + marca + " se ha reducido a " + setVelocidad(reduccionVelocidad));
-        }
+    public void frenar() {
+        setVelocidad(getVelocidad() -10);
+        System.out.println("La velocidad del " + marca + " se ha reducido a " + getVelocidad());
     }
 
     // Método mostrarDatos COMPLETAR
-    public static void mostrarDatos() {
+    public void mostrarDatos() {
         System.out.println("La marca del coche es " + marca);
         System.out.println("El modelo del coche es " + modelo);
-        System.out.println("La velocidad del coche es " + velocidad);
-    }    
+        System.out.println("La velocidad máxima del coche es " + velocidad);
+    }
 
 }
 
@@ -57,42 +53,41 @@ class Coche {
 //
 
 
+
 import java.util.ArrayList;
+import java.util.Scanner;
 
 class Alumno {
     private String nombre;
     private ArrayList<Integer> notas;
 
     // Constructor
-    public Alumno(String nombre, ArrayList<Integer> notas) {
+    public Alumno(String nombre) {
         this.nombre = nombre;
-        this.notas = notas;
+        this.notas = new ArrayList<Integer>();
     }
-   
+    
     // Método añadirNota COMPLETAR
-    public static void añadirNota(int asignatura1, int asignatura2) {
-        System.out.println("Introduce la nota de la primera asignatura: ");
-        int asignatura1 = sc.nextLine();
-        int asignatura1 = nota.add(new(nota));
-        SYstem.out.pritnln("Introduce la nota de la segunda asignatura:");
-        int asignatura2 = sc.nextLine();
-        int asignatura2 = nota.add(new(nota));
-        System.out.println("Las notas han sido añadidas.");
+    public void añadirNota(int nota) {
+        notas.add(nota);
     }
-   
+
     // Método calcularMedia COMPLETAR
-    public static void calcularMedia() {
-        int media = (asignatura1 + asignatura2) / 2;
-        System.out.println("La media de las notas es: " + media);
+    public double calcularMedia() {
+    double sumar = 0; 
+    for (Integer nota : notas) {
+        sumar += nota;
+    }
+    sumar /= notas.size();
+    return sumar;
     }
 
     // Método mostrarInfo COMPLETAR
     public static void mostrarInfo() {
-        System.out.println("La nota de la primera asignatura es: " + asignatura1);
-        System.out.println("La nota de la segunda asignatura es: " +  asignatura2);
+        System.out.println("La notas de las asignaturas son: " + notas);
         System.out.println("La media de la primera y segunda asignaturas es: " + media);
     }
-    
+
 }
 
 
@@ -265,7 +260,6 @@ public class Main {
         //   - Crear un coche con marca y modelo.
         //   - Llamar varias veces a acelerar() y frenar().
         //   - Mostrar los datos finales del coche.
-
         Coche coche = new Coche("Honda", "Civic", 180);
         coche.acelerar();
         coche.frenar();
@@ -279,8 +273,10 @@ public class Main {
         //   - Añadir varias notas con añadirNota().
         //   - Mostrar la información completa.
         //   - Calcular y mostrar la media.
-        Alumno alumno = new Alumno("Pablo")
-        alumno.añadirNota()
+
+        Alumno alumno = new Alumno("Pablo");
+        alumno.añadirNota(9);
+        alumno.añadirNota(7)
 
         // EJERCICIO 3: Cuenta Bancaria
         // Enunciado:
