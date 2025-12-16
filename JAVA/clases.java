@@ -52,11 +52,6 @@ class Coche {
 // Deja todo lo necesario para que el alumno complete.
 //
 
-
-
-import java.util.ArrayList;
-import java.util.Scanner;
-
 class Alumno {
     private String nombre;
     private ArrayList<Integer> notas;
@@ -66,7 +61,7 @@ class Alumno {
         this.nombre = nombre;
         this.notas = new ArrayList<Integer>();
     }
-    
+
     // Método añadirNota COMPLETAR
     public void añadirNota(int nota) {
         notas.add(nota);
@@ -74,20 +69,20 @@ class Alumno {
 
     // Método calcularMedia COMPLETAR
     public double calcularMedia() {
-    double sumar = 0; 
+    double sumar = 0;
     for (Integer nota : notas) {
         sumar += nota;
     }
     sumar /= notas.size();
+    System.out.println("La media de las notas es: " + sumar);
     return sumar;
     }
 
     // Método mostrarInfo COMPLETAR
-    public static void mostrarInfo() {
+    public void mostrarInfo() {
         System.out.println("La notas de las asignaturas son: " + notas);
-        System.out.println("La media de la primera y segunda asignaturas es: " + media);
+        System.out.println("La media de la primera y segunda asignaturas es: " + calcularMedia());
     }
-
 }
 
 
@@ -118,12 +113,12 @@ class CuentaBancaria {
     public void setSaldo(int saldo) {
         this.saldo = saldo;
     }
-    
+
     // método ingresar COMPLETAR
-    public int ingresar(int ingresarSaldo) {
-        boolean ingresarValido = true; 
+    public boolean ingresar(int ingresarSaldo) {
+        boolean ingresarValido = true;
         if (ingresarSaldo < 1) {
-           ingresarValido = false;
+            ingresarValido = false;
         } else {
             setSaldo(getSaldo() + ingresarSaldo);
         }
@@ -132,27 +127,28 @@ class CuentaBancaria {
         }
         return ingresarValido;
     }
-   
+
     // método retirar COMPLETAR
-    public int retirar(int retirarSaldo) {
+    public boolean retirar(int retirarSaldo) {
         boolean retirarValido = true;
         if (retirarSaldo > saldo) {
             retirarValido = false;
         } else {
-            setSaldo(getSaldo() - retirarSaldo)
+            setSaldo(getSaldo() - retirarSaldo);
         }
         if (retirarValido == true) {
             System.out.println("Has retirado " + retirarSaldo + " por lo que tu saldo se queda en " + saldo);
+        } else {
+            System.out.println("Saldo insuficiente");
         }
         return retirarValido;
     }
 
     // método mostrarSaldo COMPLETAR
-    public static void mostrarSaldo() {
+    public void mostrarSaldo() {
         System.out.println("EL nombre del titular de la cuenta es: " + titular);
         System.out.println("El saldo de la cuenta es: " + saldo);
-    } 
-    
+    }
 }
 
 
@@ -171,20 +167,26 @@ class Libro {
     private String titulo;
     private String autor;
     private boolean disponible;
-    
+
     // constructor COMPLETAR
     public Libro(String titulo, String autor, boolean disponible) {
         this.titulo = titulo;
         this.autor = autor;
         this.disponible = disponible;
     }
-   
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
 
     // método mostrarInfo COMPLETAR
-    public static void mostrarInfo() {
+    public void mostrarInfo() {
         System.out.println("Titulo: " + titulo + "\nAutor: " + autor + "\nDisponible: " + disponible);
     }
-    
 }
 
 
@@ -194,19 +196,37 @@ class Biblioteca {
     // lista de libros COMPLETAR
     private ArrayList<Libro> libros;
 
-    public Biblioteca(ArrayList<Libro> libros) {
-        this.libros = libros;
+    public Biblioteca() {
+        this.libros = new ArrayList<Libro>();
     }
 
     // añadirLibro COMPLETAR
-    public static void ()
-    
+    public void añadirLibro(Libro libro) {
+        libros.add(libro);
+    }
 
     // prestarLibro COMPLETAR
-    
+    public void prestarLibro(Libro libro) {
+        for (Libro libro : libros) {
+            if (libro.getTitulo().contains(libro.getTitulo())) {
+                libros.remove(libro);
+                System.out.println("Libro prestado correctamente.");
+            }
+        }
+    }
 
     // devolverLibro COMPLETAR
-    
+    public void devolverLibro(Libro libro) {
+        if (!libros.contains(libro)) {
+            libros.add(libro);
+            System.out.println("Libro devuelto correctamente.");
+        }
+    }
+    public void mostrarBiblioteca() {
+        for (Libro libro : libros) {
+            System.out.println("Libros: " + libro);
+        }
+    }
 }
 
 
@@ -250,6 +270,7 @@ class Carrito {
 // El main está vacío para que cada alumno pruebe los ejercicios
 // que quiera. Pueden crear objetos y llamar métodos.
 //
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -265,18 +286,17 @@ public class Main {
         coche.frenar();
         coche.mostrarDatos();
 
-
-
         // EJERCICIO 2: Alumno y notas
         // Enunciado:
         //   - Crear un alumno con su nombre.
         //   - Añadir varias notas con añadirNota().
         //   - Mostrar la información completa.
         //   - Calcular y mostrar la media.
-
         Alumno alumno = new Alumno("Pablo");
         alumno.añadirNota(9);
-        alumno.añadirNota(7)
+        alumno.añadirNota(7);
+        alumno.calcularMedia();
+        alumno.mostrarInfo();
 
         // EJERCICIO 3: Cuenta Bancaria
         // Enunciado:
@@ -285,6 +305,11 @@ public class Main {
         //   - Retirar otra cantidad.
         //   - Intentar retirar más de lo disponible (debe impedirse).
         //   - Mostrar el saldo final.
+        CuentaBancaria cuenta = new CuentaBancaria("Juan", 100);
+        cuenta.ingresar(500);
+        cuenta.retirar(50);
+        cuenta.retirar(1000);
+        cuenta.mostrarSaldo();
 
         // EJERCICIO 4: Biblioteca y Libros
         // Enunciado:
@@ -293,6 +318,21 @@ public class Main {
         //   - Prestar un libro por título.
         //   - Devolver un libro.
         //   - Mostrar si realmente cambia su disponibilidad.
+        Libro libro1 = new Libro("El Quijote", "Cervantes", true);
+        Libro libro2 = new Libro("Drácula", "Bram Stroker", true);
+        Libro libro3 = new Libro("1984", "George Orwell", false);
+        libro1.mostrarInfo();
+        libro2.mostrarInfo();
+        libro3.mostrarInfo();
+
+        Biblioteca biblioteca = new Biblioteca();
+
+        biblioteca.añadirLibro(libro1);
+        biblioteca.añadirLibro(libro2);
+        biblioteca.añadirLibro(libro3);
+
+        biblioteca.prestarLibro(libro2);
+        biblioteca.devolverLibro(libro3);
   
         // EJERCICIO 5: Producto y Carrito
         // Enunciado:
